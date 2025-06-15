@@ -31,8 +31,13 @@ source:
   sha256: 8c87c2db67130108861609eacd40d30ee109656a7765e5172eab71dd6da4c453  # [aarch64 and arm_variant_type=="tegra"]
   sha256: 17aaa7c6b8f94a417d8f3261780b7e34b9cbdfab7513bce86768623b06aa28b5  # [win]
 
+{% set number = 1 %}
+{% if arm_variant_target == "sbsa" %}
+{% set number = number + 100 %}
+{% endif %}
+
 build:
-  number: 0
+  number: {{ number }}
   skip: true  # [osx or ppc64le]
 
 outputs:
