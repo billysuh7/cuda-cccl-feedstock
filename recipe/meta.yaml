@@ -1,6 +1,9 @@
 {% set name = "cuda-cccl" %}
 {% set version = "13.3.3.4.1" %}
-{% set cccl_version = "3.3.4" %}
+{% set major = load_file_regex(load_file="lib/cmake/cccl/cccl-config-version.cmake", regex_pattern="CCCL_VERSION_MAJOR[ \t]+([0-9]+)") %}
+{% set minor = load_file_regex(load_file="lib/cmake/cccl/cccl-config-version.cmake", regex_pattern="CCCL_VERSION_MINOR[ \t]+([0-9]+)") %}
+{% set patch = load_file_regex(load_file="lib/cmake/cccl/cccl-config-version.cmake", regex_pattern="CCCL_VERSION_PATCH[ \t]+([0-9]+)") %}
+{% set cccl_version = (major.group(1) ~ "." ~ minor.group(1) ~ "." ~ patch.group(1)) if major else "0.0.0" %}
 {% set cuda_version = "13.3" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
